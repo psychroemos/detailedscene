@@ -1452,3 +1452,162 @@ details li strong {
     margin-bottom: 12px;
 }
 
+/* ---------- HERO CLOCK ---------- */
+.hero-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.clock-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+}
+
+.clock-time {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 2px 15px rgba(90, 58, 58, 0.3);
+    letter-spacing: 2px;
+}
+
+/* ---------- CURRENT PHASE HIGHLIGHT ---------- */
+.timeline-item.current-phase > .timeline-marker {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.35), 0 0 20px rgba(201, 169, 110, 0.25);
+    animation: phasePulse 2s ease-in-out infinite;
+}
+
+.timeline-item.current-phase > .timeline-content {
+    border-color: var(--gold);
+    border-width: 2px;
+    box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1), var(--shadow-md);
+}
+
+.timeline-item.current-phase > .timeline-time {
+    color: var(--gold);
+}
+
+.timeline-item.current-phase > .timeline-content::before {
+    content: '● NOW';
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: var(--radius-xl);
+    margin-bottom: 10px;
+}
+
+@keyframes phasePulse {
+    0%, 100% { box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.35), 0 0 20px rgba(201, 169, 110, 0.25); }
+    50% { box-shadow: 0 0 0 10px rgba(201, 169, 110, 0.15), 0 0 30px rgba(201, 169, 110, 0.15); }
+}
+
+/* ---------- CONTACT INPUTS ---------- */
+.contacts-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.contact-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rose-200);
+}
+
+.contact-input {
+    width: 100%;
+    padding: 7px 10px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--white);
+    border: 1.5px solid var(--rose-200);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    outline: none;
+}
+
+.contact-input:focus {
+    border-color: var(--rose-400);
+    box-shadow: 0 0 0 3px rgba(212, 160, 160, 0.2);
+    background: var(--ivory);
+}
+
+.contact-input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.contact-input.has-value {
+    border-color: var(--sage);
+    background: #f8fdf6;
+}
+
+.contact-input.has-value:focus {
+    border-color: var(--sage-dark);
+    box-shadow: 0 0 0 3px rgba(197, 207, 192, 0.25);
+}
+
+/* ---------- ROLE NAME INPUTS ---------- */
+.role-assign {
+    margin-bottom: 10px;
+}
+
+.role-name-input {
+    width: 100%;
+    padding: 8px 12px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--rose-800);
+    font-weight: 600;
+    background: var(--rose-50);
+    border: 1.5px dashed var(--rose-300);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    outline: none;
+}
+
+.role-name-input:focus {
+    border-style: solid;
+    border-color: var(--rose-400);
+    box-shadow: 0 0 0 3px rgba(212, 160, 160, 0.2);
+    background: var(--white);
+}
+
+.role-name-input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.82rem;
+}
+
+.role-name-input.has-value {
+    border-style: solid;
+    border-color: var(--sage);
+    background: #f8fdf6;
+    color: var(--text);
+}
+
+.role-name-input.has-value:focus {
+    border-color: var(--sage-dark);
+    box-shadow: 0 0 0 3px rgba(197, 207, 192, 0.25);
+}
+
