@@ -54,7 +54,22 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 70px;
+}
+
+/* ---------- TAB PANELS ---------- */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: tabFadeIn 0.35s ease;
+}
+
+@keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 body {
@@ -284,6 +299,12 @@ a:hover {
 .nav-links a.active {
     background: var(--rose-100);
     color: var(--rose-800);
+}
+
+.nav-links a.active {
+    background: var(--rose-500);
+    color: var(--white);
+    border-radius: var(--radius-xl);
 }
 
 /* Mobile nav */
@@ -1056,6 +1077,145 @@ details li strong {
     border-color: var(--rose-500);
 }
 
+/* ---------- PLANNING CHECKLIST ---------- */
+.planning-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.planning-group {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--rose-100);
+    overflow: hidden;
+}
+
+.planning-group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, var(--rose-500), var(--rose-700));
+    color: var(--white);
+}
+
+.planning-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.planning-group-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 2px;
+}
+
+.planning-month {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.planning-items {
+    padding: 20px 28px;
+}
+
+.plan-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background var(--transition);
+    user-select: none;
+    border-bottom: 1px solid var(--rose-50);
+}
+
+.plan-item:last-child {
+    border-bottom: none;
+}
+
+.plan-item:hover {
+    background: var(--rose-50);
+}
+
+.plan-item input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    accent-color: var(--rose-500);
+    cursor: pointer;
+}
+
+.plan-item span {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.5;
+    transition: all var(--transition);
+}
+
+.plan-item span strong {
+    color: var(--rose-800);
+}
+
+.plan-item span em {
+    color: var(--sage-dark);
+    font-size: 0.85rem;
+}
+
+.plan-item input:checked + span {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.plan-item input:checked + span strong {
+    color: var(--text-muted);
+}
+
+/* ---------- PLAN DATE INPUT ---------- */
+.plan-item.has-date-input {
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.plan-date-input {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: 6px 10px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--white);
+    border: 1.5px solid var(--rose-200);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    outline: none;
+    width: 150px;
+    cursor: text;
+}
+
+.plan-date-input:focus {
+    border-color: var(--rose-400);
+    box-shadow: 0 0 0 3px rgba(212, 160, 160, 0.2);
+    background: var(--ivory);
+}
+
+.plan-date-input.has-value {
+    border-color: var(--sage);
+    background: #f8fdf6;
+    font-weight: 600;
+    color: var(--rose-800);
+}
+
 /* ---------- TIPS ---------- */
 .tips-grid {
     display: grid;
@@ -1200,7 +1360,8 @@ details li strong {
 .detail-card,
 .role-card,
 .tip-card,
-.checklist-group {
+.checklist-group,
+.planning-group {
     opacity: 0;
     transform: translateY(20px);
 }
@@ -1210,7 +1371,8 @@ details li strong {
 .detail-card.visible,
 .role-card.visible,
 .tip-card.visible,
-.checklist-group.visible {
+.checklist-group.visible,
+.planning-group.visible {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -1242,7 +1404,8 @@ details li strong {
     .detail-card,
     .role-card,
     .tip-card,
-    .checklist-group {
+    .checklist-group,
+    .planning-group {
         opacity: 1;
         transform: none;
     }
@@ -1317,6 +1480,23 @@ details li strong {
 
     .contacts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .planning-items {
+        padding: 16px 14px;
+    }
+
+    .plan-item {
+        padding: 10px 8px;
+    }
+
+    .planning-group-header {
+        padding: 18px 16px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 10px 14px;
     }
 }
 

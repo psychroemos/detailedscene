@@ -11,6 +11,27 @@
 </head>
 <body>
 
+    <!-- ============ NAV ============ -->
+    <nav class="sticky-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand" data-tab="home">&hearts; Wedding Day</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-tab="home" class="active">Home</a></li>
+                <li><a href="#" data-tab="timeline">Timeline</a></li>
+                <li><a href="#" data-tab="ceremony">Ceremony</a></li>
+                <li><a href="#" data-tab="reception">Reception</a></li>
+                <li><a href="#" data-tab="roles">Roles</a></li>
+                <li><a href="#" data-tab="checklist">Checklist</a></li>
+                <li><a href="#" data-tab="planning">Planning</a></li>
+                <li><a href="#" data-tab="tips">Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============ TAB: HOME ============ -->
+    <div class="tab-panel active" data-tab="home">
+
     <!-- ============ HERO ============ -->
     <header class="hero" id="top">
         <div class="hero-overlay"></div>
@@ -34,28 +55,10 @@
                     <span class="time-value">4:00 PM</span>
                 </div>
             </div>
-            <a href="#timeline" class="btn-scroll">View the Timeline &#8595;</a>
+            <a href="#" class="btn-scroll" data-tab="timeline">View the Timeline &#8595;</a>
         </div>
     </header>
 
-    <!-- ============ NAV ============ -->
-    <nav class="sticky-nav" id="mainNav">
-        <div class="nav-inner">
-            <a href="#top" class="nav-brand">&hearts; Wedding Day</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#ceremony">Ceremony</a></li>
-                <li><a href="#reception">Reception</a></li>
-                <li><a href="#roles">Roles</a></li>
-                <li><a href="#checklist">Checklist</a></li>
-                <li><a href="#tips">Tips</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- ============ OVERVIEW ============ -->
     <!-- ============ SPIRITUAL REMINDER ============ -->
     <section class="section scripture-banner" id="dedication">
         <div class="container">
@@ -107,7 +110,10 @@
         </div>
     </section>
 
-    <!-- ============ VISUAL TIMELINE ============ -->
+    </div><!-- /.tab-panel home -->
+
+    <!-- ============ TAB: TIMELINE ============ -->
+    <div class="tab-panel" data-tab="timeline">
     <section class="section section-alt" id="timeline">
         <div class="container">
             <h2 class="section-title">Visual Timeline</h2>
@@ -656,8 +662,10 @@
             </div>
         </div>
     </section>
+    </div><!-- /.tab-panel timeline -->
 
-    <!-- ============ CEREMONY DETAIL ============ -->
+    <!-- ============ TAB: CEREMONY ============ -->
+    <div class="tab-panel" data-tab="ceremony">
     <section class="section" id="ceremony">
         <div class="container">
             <h2 class="section-title">Ceremony Details</h2>
@@ -859,8 +867,10 @@
             </div>
         </div>
     </section>
+    </div><!-- /.tab-panel ceremony -->
 
-    <!-- ============ RECEPTION DETAIL ============ -->
+    <!-- ============ TAB: RECEPTION ============ -->
+    <div class="tab-panel" data-tab="reception">
     <section class="section section-alt" id="reception">
         <div class="container">
             <h2 class="section-title">Reception Details</h2>
@@ -1069,8 +1079,10 @@
             </div>
         </div>
     </section>
+    </div><!-- /.tab-panel reception -->
 
-    <!-- ============ ROLES ============ -->
+    <!-- ============ TAB: ROLES ============ -->
+    <div class="tab-panel" data-tab="roles">
     <section class="section" id="roles">
         <div class="container">
             <h2 class="section-title">Team Roles &amp; Responsibilities</h2>
@@ -1329,8 +1341,10 @@
             </div>
         </div>
     </section>
+    </div><!-- /.tab-panel roles -->
 
-    <!-- ============ CHECKLIST ============ -->
+    <!-- ============ TAB: CHECKLIST ============ -->
+    <div class="tab-panel" data-tab="checklist">
     <section class="section section-alt" id="checklist">
         <div class="container">
             <h2 class="section-title">Day-Of Checklist</h2>
@@ -1367,7 +1381,7 @@
                 <div class="checklist-group">
                     <h3>&#129333; Groom&rsquo;s Checklist</h3>
                     <div class="checklist-items" id="groomChecklist">
-                        <label class="check-item"><input type="checkbox"><span>Morning prayer to Jehovah (3:00 AM)</span></label>
+                        <label class="check-item"><input type="checkbox"><span>Morning prayer to Jehovah (6:00 AM)</span></label>
                         <label class="check-item"><input type="checkbox"><span>Breakfast eaten &mdash; well-fueled for the day</span></label>
                         <label class="check-item"><input type="checkbox"><span>Grooming session completed (7:00 &ndash; 7:30 AM)</span></label>
                         <label class="check-item"><input type="checkbox"><span>Getting-ready photos &amp; solo portraits done</span></label>
@@ -1396,13 +1410,142 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <p class="progress-text" id="progressText">0 of 29 items completed</p>
+                <p class="progress-text" id="progressText">0 of 40 items completed</p>
             </div>
 
             <button class="btn-reset" id="resetChecklist">Reset All Checklists</button>
         </div>
     </section>
 
+    </div><!-- /.tab-panel checklist -->
+
+    <!-- ============ TAB: PLANNING ============ -->
+    <div class="tab-panel" data-tab="planning">
+    <section class="section" id="planning">
+        <div class="container">
+            <h2 class="section-title">Wedding Planning Checklist</h2>
+            <p class="section-intro">Track your wedding preparations from weeks before the big day. Check off items as you complete them!</p>
+
+            <div class="planning-checklist">
+
+                <!-- 6-8 Weeks To Go -->
+                <div class="planning-group">
+                    <div class="planning-group-header">
+                        <span class="planning-icon">&#128197;</span>
+                        <div>
+                            <h3>6&ndash;8 Weeks To Go&hellip;</h3>
+                            <span class="planning-month">March</span>
+                        </div>
+                    </div>
+                    <div class="planning-items" id="planningGroup1">
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p1"><span><strong>SEND OUT YOUR INVITATIONS.</strong> Have a game plan for recording the RSVPs.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p2"><span><strong>TOUCH BASE WITH YOUR VENDORS</strong> to confirm wedding date, deposits, and payment details.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p3"><span><strong>FINALIZE THE MENU &amp; BEVERAGE.</strong> Decide if alcohol is to be served.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p4"><span><strong>OBTAIN MARRIAGE LICENSE.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p5"><span><strong>STATUS OF BRIDE &amp; GROOM ATTIRE.</strong> Be sure to buy the appropriate undergarments and other accessories beforehand.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p6"><span><strong>DO A MAKEUP &amp; HAIR TRIAL AND BOOK YOUR STYLISTS.</strong> Come up with your own beauty and fitness regimen to be camera-ready and confident for the big day.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p7"><span><strong>WEDDING RINGS.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p8"><span><strong>CHECK THE STATUS OF VIP/ENTOURAGE ATTIRE.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p9"><span><strong>CHECK: ATTIRE OF OFFICIATING MINISTER AND CHAIRMAN.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p10"><span><strong>MEET WITH USHERS.</strong> Let them know about their tasks and duties. Provide them with attire details.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p11"><span><strong>THANK-YOU CARDS.</strong> Discuss what you&rsquo;ll give your guests &mdash; printed or electronic.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p12"><span><strong>KINGDOM HALL DECORATIONS:</strong> e.g. cloth/fabric to be hung outside the main door entrance to eliminate undesirable background, for video and photo during Bride&rsquo;s entrance. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p13"><span><strong>TRANSPORTATION.</strong> Bridal car, VIP cars, Ushers service. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p14"><span><strong>DISCUSS: PROGRAM FLOW</strong> &mdash; Both for CEREMONY and RECEPTION. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item has-date-input"><input type="checkbox" data-plan-key="p15"><span><strong>DISCUSS REHEARSAL DATES.</strong> For those involved in the wedding march and ceremony. <em>(with COORDINATOR)</em></span><input type="text" class="plan-date-input" data-plan-date-key="p15-date" placeholder="Enter date..."></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p16"><span><strong>DISCUSS MEETING WITH USHERS.</strong> Initial and final meeting. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p17"><span><strong>SEND OUT REHEARSAL DATES.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p18"><span><strong>WORK ON THE TIMELINE</strong> of the wedding day and reception formalities. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p19"><span><strong>UPDATE ON UNIVERSITY HOTEL BOOKINGS.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p20"><span><strong>CONTACT DETAILS:</strong> Fill in all contact information of Manyaman&rsquo;s Key Contacts.</span></label>
+                    </div>
+                </div>
+
+                <!-- 3-5 Weeks To Go -->
+                <div class="planning-group">
+                    <div class="planning-group-header">
+                        <span class="planning-icon">&#128198;</span>
+                        <div>
+                            <h3>3&ndash;5 Weeks To Go&hellip;</h3>
+                            <span class="planning-month">April</span>
+                        </div>
+                    </div>
+                    <div class="planning-items" id="planningGroup2">
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p21"><span><strong>HUNT DOWN WHOEVER HASN&rsquo;T RSVP&rsquo;D YET.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p22"><span><strong>FINALIZE AND CONFIRM: RECEPTION LAYOUT.</strong> <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p23"><span><strong>FINALIZE AND CONFIRM: ALL SHOT LIST</strong> with your photographer and/or videographer.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p24"><span><strong>CHECK AND FINALIZE: SONG LIST</strong> for ceremony and reception. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p25"><span><strong>FINALIZE AND CONFIRM: TIMELINE</strong> for the ceremony and reception. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p26"><span><strong>FINALIZE: TIMELINE FOR USHERS</strong> tasks and duties. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p27"><span><strong>FINALIZE: CEREMONY OUTLINE/SCRIPT</strong> including photo opp sequence. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p28"><span><strong>FINALIZE: RECEPTION PROGRAM</strong> including photo opp sequence. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p29"><span><strong>FINALIZE AND CONFIRM: WEDDING NIGHT ACCOMMODATIONS.</strong> <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p30"><span><strong>PURCHASE YOUR DAY-OF ACCESSORIES.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p31"><span><strong>HAVE YOUR FINAL DRESS/SUIT FITTING.</strong> Bring your shoes and accessories for the full impact.</span></label>
+                    </div>
+                </div>
+
+                <!-- 1-2 Weeks To Go -->
+                <div class="planning-group">
+                    <div class="planning-group-header">
+                        <span class="planning-icon">&#9200;</span>
+                        <div>
+                            <h3>1&ndash;2 Weeks To Go&hellip;</h3>
+                            <span class="planning-month">Final Stretch</span>
+                        </div>
+                    </div>
+                    <div class="planning-items" id="planningGroup3">
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p32"><span><strong>GIVE YOUR CATERER/VENUE THE FINAL GUEST COUNT.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p33"><span><strong>FINALIZE AND DISTRIBUTE TO USHERS:</strong> Seating and seating chart, also place cards. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p34"><span><strong>FINALIZE AND DISTRIBUTE TO VIPs, ENTOURAGE, USHERS:</strong> Ceremony layout. Include placements/positions of all participants. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p35"><span><strong>HAND OVER WEDDING CEREMONY ITEMS TO COORDINATOR.</strong> Include any special set-up instructions. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p36"><span><strong>PACK UP YOUR WEDDING-DAY EMERGENCY KIT.</strong> Fill a small bag with &ldquo;just in case&rdquo; items that can fix any issues &mdash; from ibuprofen and a sewing kit to an extra pair of contacts.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p37"><span><strong>CHECK THE WEATHER REPORT.</strong> If things look iffy on your wedding date, contact your venue to go over the contingency plan.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p38"><span><strong>IN DESPERATE NEED OF A FACIAL OR MASSAGE?</strong> Now&rsquo;s the time to squeeze one in.</span></label>
+                        <label class="plan-item has-date-input"><input type="checkbox" data-plan-key="p39"><span><strong>REHEARSAL WITH USHERS.</strong> <em>(with COORDINATOR)</em></span><input type="text" class="plan-date-input" data-plan-date-key="p39-date" placeholder="Enter date..."></label>
+                        <label class="plan-item has-date-input"><input type="checkbox" data-plan-key="p40"><span><strong>REHEARSAL WITH ALL INVOLVED IN THE CEREMONY.</strong> <em>(with COORDINATOR)</em></span><input type="text" class="plan-date-input" data-plan-date-key="p40-date" placeholder="Enter date..."></label>
+                    </div>
+                </div>
+
+                <!-- Last Days Before -->
+                <div class="planning-group">
+                    <div class="planning-group-header">
+                        <span class="planning-icon">&#128144;</span>
+                        <div>
+                            <h3>Last Days Before&hellip;</h3>
+                            <span class="planning-month">Almost There!</span>
+                        </div>
+                    </div>
+                    <div class="planning-items" id="planningGroup4">
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p41"><span><strong>MAKE SURE ALL WEDDING-DAY ITEMS ARE PACKED/LAID OUT AND READY TO GO.</strong> Don&rsquo;t forget the rings and marriage license!</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p42"><span><strong>FIGURE OUT FINAL PAYMENTS FOR VENDORS.</strong> Put them in clearly marked envelopes and give them to someone you trust to hand out over the course of the event.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p43"><span><strong>ASSIGN SOMEONE TO PACK UP YOUR GIFTS/BELONGINGS AFTER THE RECEPTION.</strong> Don&rsquo;t forget any part of your cake that you want to take home. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p44"><span><strong>ASSIGN SOMEONE TO RETURN ANY RENTAL ITEMS OR TUXEDOS</strong> the day after the wedding, if needed. <em>(with COORDINATOR)</em></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p45"><span><strong>DROP OFF WELCOME BAGS TO GUEST HOTELS,</strong> if you&rsquo;re doing them.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p46"><span><strong>ENJOY A MANI-PEDI.</strong></span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p47"><span><strong>TRY TO GO TO BED EARLY.</strong> You need your beauty sleep tonight!</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p48"><span><strong>SET YOUR ALARM.</strong> Allow plenty of time to get ready on your big day.</span></label>
+                        <label class="plan-item"><input type="checkbox" data-plan-key="p49"><span><strong>TAKE DEEP BREATHS.</strong></span></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Planning Progress -->
+            <div class="checklist-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="planningProgressFill"></div>
+                </div>
+                <p class="progress-text" id="planningProgressText">0 of 49 items completed</p>
+            </div>
+
+            <button class="btn-reset" id="resetPlanning">Reset Planning Checklist</button>
+        </div>
+    </section>
+    </div><!-- /.tab-panel planning -->
+
+    <!-- ============ TAB: TIPS ============ -->
+    <div class="tab-panel" data-tab="tips">
     <!-- ============ TIPS ============ -->
     <section class="section" id="tips">
         <div class="container">
@@ -1520,6 +1663,7 @@
             </div>
 
     </section>
+    </div><!-- /.tab-panel tips -->
 
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
@@ -1527,7 +1671,7 @@
             <p class="footer-quote">&ldquo;Love is patient, love is kind. It does not get puffed up. It bears all things, believes all things, hopes all things, endures all things. Love never fails.&rdquo;</p>
             <p class="footer-ref">&mdash; 1 Corinthians 13:4, 7, 8</p>
             <p class="footer-dedication">All glory to Jehovah God, the Originator of marriage.</p>
-            <a href="#top" class="back-to-top">Back to Top &uarr;</a>
+            <a href="#" class="back-to-top" data-tab="home">Back to Home &uarr;</a>
         </div>
     </footer>
 

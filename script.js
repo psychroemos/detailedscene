@@ -4,6 +4,53 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ---- Tab Navigation ----
+    const tabLinks   = document.querySelectorAll('.nav-links a[data-tab], .btn-scroll[data-tab], .back-to-top[data-tab]');
+    const tabPanels  = document.querySelectorAll('.tab-panel');
+
+    function switchTab(tabName) {
+        // Hide all panels
+        tabPanels.forEach(p => p.classList.remove('active'));
+        // Show target
+        const target = document.querySelector(`.tab-panel[data-tab="${tabName}"]`);
+        if (target) target.classList.add('active');
+
+        // Update nav active states
+        document.querySelectorAll('.nav-links a[data-tab]').forEach(a => {
+            a.classList.toggle('active', a.dataset.tab === tabName);
+        });
+
+        // Scroll to top of content (just below nav)
+        const nav = document.getElementById('mainNav');
+        if (nav) {
+            nav.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Re-trigger reveal animations for newly visible elements
+        setTimeout(() => {
+            const panel = document.querySelector(`.tab-panel[data-tab="${tabName}"]`);
+            if (panel) {
+                panel.querySelectorAll(
+                    '.timeline-item, .overview-card, .detail-card, .role-card, .tip-card, .checklist-group, .planning-group'
+                ).forEach((el, i) => {
+                    if (!el.classList.contains('visible')) {
+                        setTimeout(() => el.classList.add('visible'), i * 60);
+                    }
+                });
+            }
+        }, 50);
+    }
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tab = link.dataset.tab;
+            if (tab) switchTab(tab);
+        });
+    });
+
     // ---- Mobile Nav Toggle ----
     const navToggle = document.getElementById('navToggle');
     const navLinks  = document.getElementById('navLinks');
@@ -21,39 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ---- Active Nav Highlighting ----
-    const sections = document.querySelectorAll('.section, .hero');
-    const navAnchors = document.querySelectorAll('.nav-links a');
-
-    function highlightNav() {
-        let current = '';
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 120 && rect.bottom > 120) {
-                current = section.id;
-            }
-        });
-
-        navAnchors.forEach(a => {
-            a.classList.remove('active');
-            if (a.getAttribute('href') === '#' + current) {
-                a.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', highlightNav, { passive: true });
-    highlightNav();
-
     // ---- Scroll Reveal Animation ----
     const revealElements = document.querySelectorAll(
-        '.timeline-item, .overview-card, .detail-card, .role-card, .tip-card, .checklist-group'
+        '.timeline-item, .overview-card, .detail-card, .role-card, .tip-card, .checklist-group, .planning-group'
     );
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Stagger animation slightly
                 setTimeout(() => {
                     entry.target.classList.add('visible');
                 }, index * 50);
@@ -170,6 +192,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize progress bar
     updateProgress();
+
+    // ---- Planning Checklist with Firebase Realtime Sync ----
+    const planningCheckboxes   = document.querySelectorAll('.plan-item input[type="checkbox"]');
+    const planningProgressFill = document.getElementById('planningProgressFill');
+    const planningProgressText = document.getElementById('planningProgressText');
+    const resetPlanningBtn     = document.getElementById('resetPlanning');
+    const planningRef          = db.ref('planning');
+    let _suppressPlanningWrite = false;
+
+    function updatePlanningProgress() {
+        const total = planningCheckboxes.length;
+        const checked = Array.from(planningCheckboxes).filter(cb => cb.checked).length;
+        const percent = total ? (checked / total) * 100 : 0;
+
+        if (planningProgressFill) planningProgressFill.style.width = percent + '%';
+        if (planningProgressText) {
+            planningProgressText.textContent = `${checked} of ${total} items completed`;
+            if (checked === total && total > 0) {
+                planningProgressText.textContent += ' — All done! You\'re ready! 🎉';
+            }
+        }
+    }
+
+    function savePlanningState() {
+        if (_suppressPlanningWrite) return;
+        const state = {};
+        planningCheckboxes.forEach(cb => {
+            const key = cb.dataset.planKey;
+            if (key) state[key] = cb.checked;
+        });
+        planningRef.set(state);
+    }
+
+    planningRef.on('value', (snapshot) => {
+        const data = snapshot.val() || {};
+        _suppressPlanningWrite = true;
+        planningCheckboxes.forEach(cb => {
+            const key = cb.dataset.planKey;
+            if (key) cb.checked = !!data[key];
+        });
+        _suppressPlanningWrite = false;
+        updatePlanningProgress();
+    });
+
+    planningCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            savePlanningState();
+            updatePlanningProgress();
+        });
+    });
+
+    if (resetPlanningBtn) {
+        resetPlanningBtn.addEventListener('click', () => {
+            if (confirm('Reset all planning checklist items? This cannot be undone.')) {
+                planningCheckboxes.forEach(cb => cb.checked = false);
+                planningRef.set(null);
+                updatePlanningProgress();
+            }
+        });
+    }
+
+    updatePlanningProgress();
 
     // ---- Song Input with Firebase Realtime Sync ----
     const songInputs = document.querySelectorAll('.song-input');
@@ -385,28 +469,50 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCurrentPhase();
     setInterval(updateCurrentPhase, 30000); // Update every 30 seconds
 
-    // ---- Smooth scroll for anchor links (fallback) ----
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
+    // ---- Planning Date Inputs with Firebase Realtime Sync ----
+    const planDateInputs = document.querySelectorAll('.plan-date-input');
+    const planDatesRef   = db.ref('planDates');
+    let _suppressPlanDateWrite = false;
+
+    function savePlanDateState() {
+        if (_suppressPlanDateWrite) return;
+        const state = {};
+        planDateInputs.forEach(input => {
+            const key = input.dataset.planDateKey;
+            if (key) state[key] = input.value || '';
+        });
+        planDatesRef.set(state);
+    }
+
+    planDatesRef.on('value', (snapshot) => {
+        const data = snapshot.val() || {};
+        _suppressPlanDateWrite = true;
+        planDateInputs.forEach(input => {
+            const key = input.dataset.planDateKey;
+            if (key && data[key]) {
+                input.value = data[key];
+                input.classList.add('has-value');
+            } else if (key) {
+                input.value = '';
+                input.classList.remove('has-value');
             }
         });
+        _suppressPlanDateWrite = false;
     });
 
-    // ---- Parallax-like hero effect ----
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            if (scrolled < window.innerHeight) {
-                hero.style.backgroundPositionY = scrolled * 0.3 + 'px';
+    planDateInputs.forEach(input => {
+        // Prevent click from toggling checkbox
+        input.addEventListener('click', (e) => e.stopPropagation());
+        let debounceTimer;
+        input.addEventListener('input', () => {
+            if (input.value.trim()) {
+                input.classList.add('has-value');
+            } else {
+                input.classList.remove('has-value');
             }
-        }, { passive: true });
-    }
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => savePlanDateState(), 400);
+        });
+    });
 
 });
